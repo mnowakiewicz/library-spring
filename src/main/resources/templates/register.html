@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head lang="en">
+
+    <title>Library</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/1.11.1/jquery.min.js"
+            th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+
+    <link href="../static/css/main.css"
+          th:href="@{css/main.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="cointaner">
+    <div class="message-not-null" th:if="${#fields.hasErrors('user.username') || #fields.hasErrors('user.password') || #fields.hasErrors('user.email')}">
+        <div class="alert alert-danger" role="alert">
+            <p th:errors="${user.username}"></p>
+            <p th:errors="${user.email}"></p>
+            <p th:errors="${user.password}"></p>
+        </div>
+    </div>
+    <form action="#" th:action="@{/register}" th:object="${user}" method="post">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="sizing-addon1">Username</span>
+            <input type="text" class="form-control"  aria-describedby="sizing-addon1" th:field="*{username}"/>
+        </div>
+
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="sizing-addon2">Email</span>
+            <input type="email" class="form-control"  aria-describedby="sizing-addon1" th:field="*{email}"/>
+        </div>
+
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="sizing-addon3">Password</span>
+            <input type="password" class="form-control"  aria-describedby="sizing-addon3" th:field="*{password}"/>
+
+        </div>
+        <div class="input-group input-group-lg">
+            <input type="submit" value="Register" class="btn btn-primary btn-lg"/>
+        </div>
+    </form>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

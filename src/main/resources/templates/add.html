@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head lang="en">
+
+    <title>Library</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/1.11.1/jquery.min.js"
+            th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+
+    <link href="../static/css/main.css"
+          th:href="@{css/main.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="cointaner">
+    <div class="album text-muted">
+        <div class="message-not-null" th:if="${message != null}">
+            <div class="alert alert-success" role="alert" th:text="${message}">Message</div>
+        </div>
+
+        <div class="message-not-null" th:if="${#fields.hasErrors('book.title') || #fields.hasErrors('book.author') || #fields.hasErrors('book.isbn')}">
+            <div class="alert alert-danger" role="alert">
+                <p th:errors="${book.title}"></p>
+                <p th:errors="${book.author}"></p>
+                <p th:errors="${book.isbn}"></p>
+            </div>
+        </div>
+
+        <form th:action="@{/add}" th:object="${book}" method="post">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">Title</span>
+                <input type="text" class="form-control" aria-describedby="sizing-addon1" th:field="*{title}"></input>
+            </div>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon2">Author</span>
+                <input type="text" class="form-control"  aria-describedby="sizing-addon2" th:field="*{author}"></input>
+            </div>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon3">ISBN</span>
+                <input type="number" class="form-control"  aria-describedby="sizing-addon3" th:field="*{isbn}"></input>
+            </div>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon4">Image URL</span>
+                <input type="text" class="form-control"  aria-describedby="sizing-addon4" th:field="*{imageUrl}" placeholder="may be empty"></input>
+            </div>
+            <div class="input-group input-group-lg">
+                <input type="submit" value="Add Book" class="btn btn-primary btn-lg"/>
+            </div>
+        </form>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+
+
+</body>
+</html>

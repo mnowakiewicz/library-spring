@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head lang="en">
+
+    <title>Library</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/1.11.1/jquery.min.js"
+            th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+
+    <link href="../static/css/main.css"
+          th:href="@{css/main.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="cointaner">
+    <div class="message-not-null" th:if="${message != null}">
+        <div class="alert alert-danger" role="alert" th:text="${message}">Message</div>
+    </div>
+    <form th:action="@{/login}" method="post">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="sizing-addon1">Username</span>
+            <input type="text" id="username" name="username" class="form-control"  aria-describedby="sizing-addon1" placeholder="user111"/>
+        </div>
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="sizing-addon3">Password</span>
+            <input type="password" id="password" name="password" class="form-control"  aria-describedby="sizing-addon3" placeholder="pass111"/>
+        </div>
+        <div class="input-group input-group-lg">
+            <input type="submit" value="Log in" class="btn btn-primary btn-lg"/>
+        </div>
+        <div class="input-group input-group-lg">
+            <span>If you do not have an account yet, register <a href="/register">here</a> </span>
+        </div>
+    </form>
+
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

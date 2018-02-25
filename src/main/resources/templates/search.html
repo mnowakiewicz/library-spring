@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head lang="en">
+
+    <title>Library</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/1.11.1/jquery.min.js"
+            th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+
+    <link href="../static/css/main.css"
+          th:href="@{css/main.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="cointaner">
+    <div class="album text-muted">
+        <div class="message-not-null" th:if="${message != null}">
+            <div class="alert alert-danger" role="alert" th:text="${message}">Message</div>
+        </div>
+        <form th:action="@{/search}" method="post">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon3">Title</span>
+                <input type="text" class="form-control"  aria-describedby="sizing-addon3" th:field="${book.title}"/>
+            </div>
+            <div class="input-group input-group-lg">
+                <input type="submit" value="Search Books" class="btn btn-primary btn-lg"/>
+            </div>
+        </form>
+    </div>
+
+    <div class="books-found" th:if="${!foundBooks.isEmpty()}">
+        <h2>Books found</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${foundBooks}">
+                <td><a th:href="${book.bookId}" th:text="${book.title}"></a></td>
+                <td th:text="${book.author}"/>
+                <td th:text="${book.isbn}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+
+
+</body>
+</html>

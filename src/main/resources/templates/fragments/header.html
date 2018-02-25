@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head lang="en">
+
+    <title>Library</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/1.11.1/jquery.min.js"
+            th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+
+    <link href="../static/css/main.css"
+          th:href="@{css/main.css}" rel="stylesheet" media="screen"/>
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:fragment="header">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/" >Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/books">Books <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/search">Search <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/add">Add <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item active">
+                <a sec:authorize="!isAuthenticated()" class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a sec:authorize="!isAuthenticated()" class="nav-link" href="/register">Register<span class="sr-only">(current)</span></a>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="nav-item active">
+                <a class="nav-link" href="/logout">Logout <span class="sr-only">(current)</span></a>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="nav-item active username">
+                <a sec:authentication="name" class="nav-link"><span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>
